@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AshrafController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +30,15 @@ Route::get('/login/{name}/{email}/{number?}', function (string $name, string $em
 
 Route::get('/login/{city}', function (Request $request) {
     return $request->name ?? "error to read city name!";
+});
+
+// Controller class function use
+Route::get('/me', [UserController::class, 'ashraf']);
+
+
+Route::get('/ashraf/{age?}', [AshrafController::class, 'ashraf'])->where(['age' => '[0-9]+']);
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/mahim', 'mahim');
+    Route::get('/bipu', 'bipu');
 });
