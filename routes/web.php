@@ -38,7 +38,7 @@ Route::get('/me', [UserController::class, 'ashraf']);
 
 Route::get('/ashraf/{age?}', [AshrafController::class, 'ashraf'])->where(['age' => '[0-9]+']);
 
-Route::controller(UserController::class)->group(function () {
+Route::controller(UserController::class)->prefix("person")->group(function () {
     Route::get('/mahim', 'mahim');
     Route::get('/bipu', 'bipu');
 });

@@ -13,11 +13,11 @@ class UserController extends Controller
 
     public function mahim()
     {
-        return "My name is Mahim!";
+        return view("mahim");
     }
 
     public function bipu()
     {
-        return "My name is bipu!";
+        return view("bipu");
     }
 }
