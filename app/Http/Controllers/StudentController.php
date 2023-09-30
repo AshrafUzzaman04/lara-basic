@@ -28,13 +28,15 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $request->validate([
             "sname" => "required | min:03 | regex:/^[a-zA-z ]+$/",
         ],[
             "sname.required" =>"Username is required!",
             "sname.min" =>"The name is too short!",
             "sname.regex" =>"Invalid username!",
         ]);
+
+        return;
     }
 
     /**
