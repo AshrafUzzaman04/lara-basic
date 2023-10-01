@@ -10,9 +10,13 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Student $student)
     {
-        return view('student-list');
+        // get all the students for this function
+        // $student->all();
+        // paiginate the all students
+        $allstudents = $student->paginate(5);
+        return view('student-list', compact('allstudents'));
     }
 
     /**
@@ -20,13 +24,14 @@ class StudentController extends Controller
      */
     public function create()
     {
+
         return view('add-student');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Student $student)
     {
        $request->validate([
             "sname" => "required | min:03 | regex:/^[a-zA-z ]+$/",
@@ -36,7 +41,11 @@ class StudentController extends Controller
             "sname.regex" =>"Invalid username!",
         ]);
 
-        return;
+        $student->name = $request->sname;
+        $msg = "$request->sname added successfully!";
+        $student->save();
+
+        return redirect()->back()->with("msg", "$msg");
     }
 
     /**
