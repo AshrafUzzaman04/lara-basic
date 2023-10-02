@@ -2,21 +2,23 @@
     <x-slot:pageTitle>Studtent List</x-slot:pageTitle>
     <x-slot:heading>Studtent List</x-slot:heading>
     @if ($allstudents->firstItem() != 0)
-    <table class="table table-dark table-hover">
+    <table class="table table-dark table-hover text-center">
         <t-head>
             <tr>
                 <th>S.N</th>
                 <th>Name</th>
+                <th>Image</th>
                 <th>Action</th>
             </tr>
         </t-head>
         <t-body>
             @foreach ($allstudents as $allstd)
-            <tr>
+            <tr valign="middle">
                 {{-- loop the serial no --}}
                 <th>{{$allstudents->firstItem() + $loop->index}}</th>
                 {{-- fetch the all name --}}
                 <th>{{$allstd->name}}</th>
+                <th ><img src="{{"uploads/". $allstd->image}}" alt="" style="object-fit:cover" width="80px" height="80px"></th>
                 <th>
                     <a href="{{route("student.show", $allstd->id)}}"><button class="btn btn-primary">View</button></a>
                     <a href="{{route("student.edit", $allstd->id)}}"><button class="btn btn-warning">Edit</button></a>

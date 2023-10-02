@@ -1,17 +1,19 @@
 <x-layout>
     <x-slot:pageTitle>Edit Student</x-slot:pageTitle>
     <x-slot:heading>Edit Student</x-slot:heading>
-    <div class="row">
-        <div class="col-md-6">
-            <form action={{route('student.update', $student->id)}} method="POST">
+    <div class="row my-5">
+        <div class="col-md-6" style="height: max-content;">
+            <form action="{{route('student.update', $student->id)}}" enctype="multipart/form-data" method="POST" class=" shadow p-4">
                 {{-- Cross Site Forgery attacks --}}
                 @csrf
                 @method("PUT")
-            <div class="my-2">
-                <label for="exampleFormControlInput1" class="form-label">Username</label>
+            <div class="my-4">
+                <input type="file" class="form-control" name="stdimg" placeholder="username" value="{{old("stdimg") ?? ($student->image) ?? null}}">
+            </div>
+            <div class="my-4">
                 <input type="text" class="form-control" name="sname" placeholder="username" value="{{old("sname") ?? ($student->name) ?? null}}">
             </div>
-            <div class="my-2">
+            <div class="my-4">
                 <input type="submit" class="btn btn-primary" value="Update">
             </div>
             {{-- check the validation errors --}}
