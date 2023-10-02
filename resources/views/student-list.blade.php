@@ -18,7 +18,7 @@
                 <th>{{$allstudents->firstItem() + $loop->index}}</th>
                 {{-- fetch the all name --}}
                 <th>{{$allstd->name}}</th>
-                <th ><img src="{{"uploads/". $allstd->image}}" alt="" style="object-fit:cover" width="80px" height="80px"></th>
+                <th ><img src="{{asset("uploads/". $allstd->image)}}" alt="" style="object-fit:cover" width="80px" height="80px"></th>
                 <th>
                     <a href="{{route("student.show", $allstd->id)}}"><button class="btn btn-primary">View</button></a>
                     <a href="{{route("student.edit", $allstd->id)}}"><button class="btn btn-warning">Edit</button></a>
