@@ -14,7 +14,7 @@ class StudentController extends Controller
     {
         // get all the students for this function
         // $student->all();
-        // paiginate the all students
+        // paginate the all students
         $allstudents = $student->paginate(5);
         return view('student-list', compact('allstudents'));
     }
@@ -53,7 +53,7 @@ class StudentController extends Controller
      */
     public function show(student $student)
     {
-        //
+        return view("show-student", compact("student"));
     }
 
     /**
@@ -61,7 +61,7 @@ class StudentController extends Controller
      */
     public function edit(student $student)
     {
-        //
+        return view("edit-student", compact("student"));
     }
 
     /**
@@ -69,7 +69,19 @@ class StudentController extends Controller
      */
     public function update(Request $request, student $student)
     {
-        //
+        $request->validate([
+            "sname" => "required | min:03 | regex:/^[A-Za-z. ]*$/",
+        ],[
+            "sname.required" =>"Username is required!",
+            "sname.min" =>"The name is too short!",
+            "sname.regex" =>"Invalid username!",
+        ]);
+
+        $student->name = $request->sname;
+        $msg = $request->sname . " has been updated!";
+        $student->save();
+
+        return redirect()->back()->with("msg", "$msg");
     }
 
     /**
@@ -77,6 +89,8 @@ class StudentController extends Controller
      */
     public function destroy(student $student)
     {
-        //
+        $student->delete();
+        $msg = $student->name. " has been deleted!";
+        return redirect()->back()->with("msg", "$msg");
     }
 }

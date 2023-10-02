@@ -9,7 +9,7 @@
 </head>
 <body>
     <x-student.navbar></x-student.navbar>
-    <h1 class="text-center">{{$heading}}</h1>
+    <h1 class="text-center mt-5">{{$heading}}</h1>
     <div class="main container">
         {{-- views folder other blade slot --}}
         {{$slot}}
